@@ -1,0 +1,216 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MathEngine | 2D Graph</title>
+
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="lab.css">
+
+    <script src="https://cdn.plot.ly/plotly-3.3.1.min.js" defer></script>
+    <script src="lab.js" defer></script>
+</head>
+
+<body>
+
+<header>
+    MathEngine
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="calculus1.html">Calculus 1</a>
+        <a href="calculus2.html">Calculus 2</a>
+        <a href="calculus3.html">Calculus 3</a>
+        <a href="graph2d.html">2D Graph</a>
+        <a href="graph3d.html">3D Graph</a>
+    </nav>
+</header>
+
+<main class="laboratory">
+
+    <section class="lab-heading">
+        <h1>2D Graphing Laboratory</h1>
+        <p>Visualize mathematical functions and explore calculus.</p>
+    </section>
+
+    <div class="lab-layout">
+
+        <aside class="lab-panel">
+
+            <h2>Graph Settings</h2>
+
+            <label for="graphMode">Graph type</label>
+            <select id="graphMode">
+                <option value="cartesian">Cartesian</option>
+                <option value="polar">Polar</option>
+                <option value="parametric">Parametric</option>
+            </select>
+
+            <label for="functionInput" id="functionLabel">
+                Functions f(x), one per line
+            </label>
+
+            <textarea id="functionInput" rows="4">sin(x)
+cos(x)</textarea>
+
+            <label for="examples">Examples</label>
+            <select id="examples">
+                <option value="">Choose a function</option>
+                <option value="sin(x)">Sine</option>
+                <option value="cos(x)">Cosine</option>
+                <option value="x^2">Parabola</option>
+                <option value="x^3-3*x">Cubic function</option>
+                <option value="exp(x)">Exponential</option>
+                <option value="ln(x)">Logarithm</option>
+                <option value="1/x">Reciprocal function</option>
+                <option value="sin(x)/x">Sinc function</option>
+            </select>
+
+            <div class="lab-fields">
+                <label>
+                    X min
+                    <input id="xmin" type="number" value="-10">
+                </label>
+
+                <label>
+                    X max
+                    <input id="xmax" type="number" value="10">
+                </label>
+
+                <label>
+                    Y min
+                    <input id="ymin" type="number" value="-5">
+                </label>
+
+                <label>
+                    Y max
+                    <input id="ymax" type="number" value="5">
+                </label>
+            </div>
+
+            <div class="lab-fields">
+                <label>
+                    t min
+                    <input id="tmin" type="number" value="0" step="any">
+                </label>
+
+                <label>
+                    t max
+                    <input id="tmax" type="number"
+                           value="6.283185307" step="any">
+                </label>
+            </div>
+
+            <button id="plotButton" type="button">
+                Plot Graph
+            </button>
+
+            <button id="resetGraph" type="button" class="secondary">
+                Reset
+            </button>
+
+            <p id="graphStatus" class="lab-status"></p>
+
+            <p class="lab-hint">
+                Use ^ for powers and * for multiplication.
+                Angles are measured in radians.
+            </p>
+
+        </aside>
+
+        <section class="lab-panel">
+            <h2>Coordinate Plane</h2>
+            <div id="graphPlot" class="lab-plot"></div>
+        </section>
+
+    </div>
+
+    <section class="lab-panel lab-section">
+
+        <h2>Calculus Tools</h2>
+
+        <label for="activeFunction">Active function</label>
+        <select id="activeFunction"></select>
+
+        <label for="pointX">Point x₀</label>
+        <input id="pointX" type="number" value="1" step="any">
+
+        <div class="lab-actions">
+            <button data-operation="evaluate">Evaluate</button>
+            <button data-operation="derivative">Derivative</button>
+            <button data-operation="tangent">Tangent Line</button>
+            <button data-operation="roots">Find Zeros</button>
+            <button data-operation="intersections">Intersections</button>
+        </div>
+
+        <h3>Definite Integral</h3>
+
+        <div class="lab-fields">
+            <label>
+                Lower bound
+                <input id="intA" type="number" value="0" step="any">
+            </label>
+
+            <label>
+                Upper bound
+                <input id="intB" type="number"
+                       value="3.141592654" step="any">
+            </label>
+        </div>
+
+        <button data-operation="integral">
+            Calculate Integral
+        </button>
+
+        <pre id="analysisResults" class="lab-results">Results will appear here.</pre>
+
+        <p class="lab-hint">
+            Calculus tools use numerical approximation
+            and require Cartesian functions.
+        </p>
+
+    </section>
+
+    <section class="lab-section">
+        <h2>Mathematical Reference</h2>
+
+        <div class="lab-topic-grid">
+
+            <article class="lab-panel">
+                <h3>Trigonometric Functions</h3>
+                <p>sin(x), cos(x), tan(x)</p>
+                <p>sec(x), csc(x), cot(x)</p>
+            </article>
+
+            <article class="lab-panel">
+                <h3>Exponential and Logarithmic</h3>
+                <p>exp(x), ln(x), log10(x)</p>
+                <p>Constants: pi, e</p>
+            </article>
+
+            <article class="lab-panel">
+                <h3>Polar Coordinates</h3>
+                <p>r = f(t)</p>
+                <p>Example: 2*cos(5*t)</p>
+            </article>
+
+            <article class="lab-panel">
+                <h3>Parametric Equations</h3>
+                <p>Enter x(t) and y(t) on separate lines.</p>
+                <p>Example: 3*cos(3*t), 3*sin(2*t)</p>
+            </article>
+
+        </div>
+    </section>
+
+</main>
+
+<footer>
+    <p>MathEngine</p>
+    <p>Version 0.2.0</p>
+    <p>© 2026 MathEngine. Built for mathematics and engineering.</p>
+</footer>
+
+</body>
+</html>

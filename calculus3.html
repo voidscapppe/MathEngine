@@ -1,0 +1,363 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MathEngine | Calculus III</title>
+
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="lab.css">
+
+    <script src="https://cdn.plot.ly/plotly-3.3.1.min.js" defer></script>
+    <script src="lab.js" defer></script>
+</head>
+
+<body>
+
+<header>
+    MathEngine
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="calculus1.html">Calculus 1</a>
+        <a href="calculus2.html">Calculus 2</a>
+        <a href="calculus3.html">Calculus 3</a>
+        <a href="graph2d.html">2D Graph</a>
+        <a href="graph3d.html">3D Graph</a>
+    </nav>
+</header>
+
+<main class="laboratory">
+
+    <section class="lab-heading">
+        <h1>Calculus III Laboratory</h1>
+        <p>
+            Explore multivariable functions, partial derivatives,
+            gradients, multiple integrals and vector fields.
+        </p>
+    </section>
+
+    <div class="lab-layout">
+
+        <aside class="lab-panel">
+
+            <h2>Surface Settings</h2>
+
+            <label for="surfaceExpr">Function z = f(x,y)</label>
+            <input id="surfaceExpr" type="text"
+                   value="sin(x)*cos(y)">
+
+            <label for="surfaceExample">Surface examples</label>
+
+            <select id="surfaceExample">
+                <option value="">Choose a surface</option>
+                <option value="sin(x)*cos(y)">Trigonometric Surface</option>
+                <option value="x^2+y^2">Paraboloid</option>
+                <option value="x^2-y^2">Saddle Surface</option>
+                <option value="exp(-(x^2+y^2))">Gaussian Surface</option>
+                <option value="sin(sqrt(x^2+y^2))">Radial Waves</option>
+                <option value="sqrt(9-x^2-y^2)">Hemisphere</option>
+                <option value="cos(x*y)/(1+x^2+y^2)">Damped Waves</option>
+            </select>
+
+            <div class="lab-fields">
+
+                <label>
+                    X min
+                    <input id="sxmin" type="number" value="-5">
+                </label>
+
+                <label>
+                    X max
+                    <input id="sxmax" type="number" value="5">
+                </label>
+
+                <label>
+                    Y min
+                    <input id="symin" type="number" value="-5">
+                </label>
+
+                <label>
+                    Y max
+                    <input id="symax" type="number" value="5">
+                </label>
+
+            </div>
+
+            <label for="resolution">Resolution</label>
+            <input id="resolution" type="number"
+                   value="65" min="20" max="100">
+
+            <label for="colorscale">Color scheme</label>
+
+            <select id="colorscale">
+                <option>Viridis</option>
+                <option>Plasma</option>
+                <option>Turbo</option>
+                <option>Cividis</option>
+                <option>RdBu</option>
+                <option>Inferno</option>
+            </select>
+
+            <label class="lab-check">
+                <input id="contours" type="checkbox">
+                Show contours
+            </label>
+
+            <button id="surfaceButton">Plot Surface</button>
+
+            <p id="surfaceStatus" class="lab-status"></p>
+
+            <p class="lab-hint">
+                Drag to rotate the surface.
+                Scroll to zoom.
+            </p>
+
+        </aside>
+
+        <section class="lab-panel">
+            <h2>3D Surface Visualization</h2>
+            <div id="surfacePlot" class="lab-plot"></div>
+        </section>
+
+    </div>
+
+    <section class="lab-panel lab-section">
+
+        <h2>Partial Derivatives and Gradient</h2>
+
+        <p class="lab-formula">∇f = (∂f/∂x, ∂f/∂y)</p>
+
+        <div class="lab-fields">
+            <label>
+                Point x₀
+                <input id="px" type="number" value="1" step="any">
+            </label>
+
+            <label>
+                Point y₀
+                <input id="py" type="number" value="1" step="any">
+            </label>
+
+            <label>
+                Direction uₓ
+                <input id="ux" type="number" value="1" step="any">
+            </label>
+
+            <label>
+                Direction uᵧ
+                <input id="uy" type="number" value="1" step="any">
+            </label>
+        </div>
+
+        <div class="lab-actions">
+            <button id="pointButton">Analyze Point</button>
+            <button id="planeButton">Show Tangent Plane</button>
+        </div>
+
+        <pre id="pointResults" class="lab-results">Results will appear here.</pre>
+
+    </section>
+
+    <section class="lab-panel lab-section">
+
+        <h2>Double Integral Calculator</h2>
+
+        <p class="lab-formula">∫∫ f(x,y) dA</p>
+
+        <p>
+            Calculate a double integral of the selected surface
+            over a rectangular region.
+        </p>
+
+        <div class="lab-fields">
+
+            <label>
+                X lower bound
+                <input id="ixa" type="number" value="0" step="any">
+            </label>
+
+            <label>
+                X upper bound
+                <input id="ixb" type="number" value="1" step="any">
+            </label>
+
+            <label>
+                Y lower bound
+                <input id="iya" type="number" value="0" step="any">
+            </label>
+
+            <label>
+                Y upper bound
+                <input id="iyb" type="number" value="1" step="any">
+            </label>
+
+        </div>
+
+        <label for="intN">Subdivisions per axis</label>
+
+        <input id="intN" type="number"
+               value="80" min="10" max="200">
+
+        <button id="integrateButton">Calculate Double Integral</button>
+
+        <pre id="integralResults" class="lab-results">Results will appear here.</pre>
+
+    </section>
+
+    <section class="lab-section">
+
+        <h2>Vector Field Laboratory</h2>
+
+        <div class="lab-layout">
+
+            <aside class="lab-panel">
+
+                <p class="lab-formula">F = (P, Q, R)</p>
+
+                <label>
+                    P(x,y,z)
+                    <input id="vecP" type="text" value="-y">
+                </label>
+
+                <label>
+                    Q(x,y,z)
+                    <input id="vecQ" type="text" value="x">
+                </label>
+
+                <label>
+                    R(x,y,z)
+                    <input id="vecR" type="text" value="0">
+                </label>
+
+                <h3>Evaluation Point</h3>
+
+                <div class="lab-fields">
+                    <label>
+                        X
+                        <input id="vx" type="number" value="1" step="any">
+                    </label>
+
+                    <label>
+                        Y
+                        <input id="vy" type="number" value="1" step="any">
+                    </label>
+
+                    <label>
+                        Z
+                        <input id="vz" type="number" value="1" step="any">
+                    </label>
+                </div>
+
+                <button id="vectorButton">Plot Vector Field</button>
+
+                <pre id="vectorResults" class="lab-results"></pre>
+
+            </aside>
+
+            <section class="lab-panel">
+                <h2>3D Vector Field</h2>
+                <div id="vectorPlot" class="lab-plot"></div>
+            </section>
+
+        </div>
+
+    </section>
+
+    <section class="lab-section">
+
+        <h2>Calculus III — Theory</h2>
+
+        <div class="lab-topic-grid">
+
+            <article class="lab-panel">
+                <h3>Partial Derivatives</h3>
+                <p>Differentiate a function with respect to one
+                   variable while keeping other variables constant.</p>
+                <p class="lab-formula">fₓ, fᵧ, fₓₓ, fᵧᵧ, fₓᵧ</p>
+            </article>
+
+            <article class="lab-panel">
+                <h3>Gradient</h3>
+                <p>The gradient points in the direction
+                   of steepest increase.</p>
+                <p class="lab-formula">∇f = (fₓ, fᵧ, fᵤ)</p>
+                <p>For three variables x, y and z, the third component is fᶻ (∂f/∂z).</p>
+            </article>
+
+            <article class="lab-panel">
+                <h3>Directional Derivative</h3>
+                <p>Rate of change along a unit vector u.</p>
+                <p class="lab-formula">Dᵤf = ∇f · u</p>
+            </article>
+
+            <article class="lab-panel">
+                <h3>Hessian Matrix</h3>
+                <p>Second-order derivatives used for
+                   stationary point classification.</p>
+                <p class="lab-formula">D = fₓₓfᵧᵧ − (fₓᵧ)²</p>
+            </article>
+
+            <article class="lab-panel">
+                <h3>Lagrange Multipliers</h3>
+                <p>Optimization subject to constraints.</p>
+                <p class="lab-formula">∇f = λ∇g</p>
+            </article>
+
+            <article class="lab-panel">
+                <h3>Double Integrals</h3>
+                <p>Signed volume and integration
+                   over two-dimensional regions.</p>
+                <p class="lab-formula">∫∫ f(x,y) dA</p>
+            </article>
+
+            <article class="lab-panel">
+                <h3>Triple Integrals</h3>
+                <p>Integration over three-dimensional regions.</p>
+                <p class="lab-formula">∫∫∫ f(x,y,z) dV</p>
+            </article>
+
+            <article class="lab-panel">
+                <h3>Jacobian</h3>
+                <p>Change of variables in multiple integrals.</p>
+                <p class="lab-formula">J = det(∂(x,y)/∂(u,v))</p>
+            </article>
+
+            <article class="lab-panel">
+                <h3>Vector Fields</h3>
+                <p>A vector associated with each point in space.</p>
+                <p class="lab-formula">F = Pi + Qj + Rk</p>
+            </article>
+
+            <article class="lab-panel">
+                <h3>Divergence and Curl</h3>
+                <p>Measure local expansion and rotation.</p>
+                <p class="lab-formula">∇ · F, ∇ × F</p>
+            </article>
+
+            <article class="lab-panel">
+                <h3>Line and Surface Integrals</h3>
+                <p>Integration along curves and surfaces.</p>
+                <p class="lab-formula">∫ F · dr, ∬ F · n dS</p>
+            </article>
+
+            <article class="lab-panel">
+                <h3>Green, Stokes and Gauss</h3>
+                <p>Fundamental theorems connecting integrals
+                   over regions with integrals over their boundaries.</p>
+            </article>
+
+        </div>
+
+    </section>
+
+</main>
+
+<footer>
+    <p>MathEngine</p>
+    <p>Version 0.2.0</p>
+    <p>© 2026 MathEngine. Built for mathematics and engineering.</p>
+</footer>
+
+</body>
+</html>
